@@ -31,6 +31,7 @@ namespace OpenCallouts.Callouts
         public override bool OnCalloutAccepted()
         {
             Game.LogTrivial("[OpenCallouts] Started callout Armed Person Pursuit");
+            
             _stolenCar = new("chernobog", _spawnPoint)
             {
                 IsPersistent = true,
@@ -45,10 +46,10 @@ namespace OpenCallouts.Callouts
             _suspect.MaxHealth = 200;
             _suspect.Health = 200;
             _suspect.Armor = 50;
-            _suspect.RelationshipGroup = RelationshipGroup.AggressiveInvestigate;
-
+            _suspect.Tasks.FightAgainst(Game.LocalPlayer.Character);
             _blip = _suspect.AttachBlip();
             _blip.IsFriendly = false;
+            
             return base.OnCalloutAccepted();
         }
 
@@ -69,10 +70,12 @@ namespace OpenCallouts.Callouts
         public override void End()
         {
             Game.LogTrivial("[OpenCallouts] Ended callout Armed Person Pursuit");
+            
             if (_suspect) _suspect.Dismiss();
             if (_stolenCar) _stolenCar.Dismiss();
             if (_blip) _blip.Delete();
             Functions.PlayScannerAudio("ATTENTION_THIS_IS_DISPATCH_HIGH ALL_UNITS_CODE4 DL_NO_FURTHER_UNITS_REQUIRED");
+            
             base.End();
         }
     }

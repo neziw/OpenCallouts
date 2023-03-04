@@ -26,7 +26,7 @@ namespace OpenCallouts
         private static void StartCallouts()
         {
             Functions.RegisterCallout(typeof(ArmedPursuit));
-            //Functions.RegisterCallout(typeof(ArmedSuspect));
+            Functions.RegisterCallout(typeof(ArmedSuspect));
             //Functions.RegisterCallout(typeof(GangActivity));
             //Functions.RegisterCallout(typeof(StolenCarPursuit));
             //Functions.RegisterCallout(typeof(TerroristAttack));
